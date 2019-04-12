@@ -134,4 +134,28 @@ router.get(
   }
 );
 
+// @route  GET api/users/all
+// @desc   Get all users
+// @access Public
+router.get("/all", (req, res) => {
+  const errors = {};
+
+  User.find()
+    .then(users => {
+      if (!users) {
+        errors.nousers = "There are no users";
+        return res.status(404).json(errors);
+      }
+
+      const publicUsers = users.map(({ id, name, email }) => ({
+        id,
+        name,
+        email
+      }));
+      res.json(publicUsers);
+    })
+
+    .catch(err => res.status(404).json({ users: "There was an error" }));
+});
+
 module.exports = router;
