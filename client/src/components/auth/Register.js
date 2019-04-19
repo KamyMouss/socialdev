@@ -128,6 +128,7 @@ class Register extends Component {
   }
 }
 
+// Basic React connections
 Register.propTypes = {
   register: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
